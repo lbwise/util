@@ -10,8 +10,10 @@ import (
 	_ "github.com/lib/pq"
 )
 
-type DB struct {
-	Database *sqlx.DB
+var DB *Database
+
+type Database struct {
+	sqlxDB *sqlx.DB
 }
 
 func CreateDB(conn string) (*DB, error){
@@ -20,8 +22,8 @@ func CreateDB(conn string) (*DB, error){
 		return nil, errors.New("unable to connect to database")
 	}
 	fmt.Println("SUCCESSFULLY CONNECTED TO DB")
-	newDB := &DB{database}
-	return newDB, nil
+	DB = &DB{sqlxDB: database}
+	return DB, nil
 }
 
 
