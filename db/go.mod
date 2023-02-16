@@ -1,4 +1,4 @@
-module github.com/lbwise/util/db
+module github.com/lbwise/db
 
 go 1.19
 

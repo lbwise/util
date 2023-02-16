@@ -25,7 +25,7 @@ func CreateDB(conn string) (*DB, error){
 }
 
 
-func QueryFromFile(path string) (string, error) {
+func (DB *DB) QueryFromFile(path string) (string, error) {
 	fi, err := os.Open(path)
 	if err != nil {
 		return "", errors.New("could not open given file")
@@ -40,7 +40,7 @@ func QueryFromFile(path string) (string, error) {
 
 
 // Exec is a proxy for the sql.DB method Exec
-func (DB *DB) Exec(query string)(sql.Result, error) {
+func (DB *DB) Exec(query string) (sql.Result, error) {
 	res, err := DB.database.Exec(query)
 	if err != nil {
 		return nil, errors.New("unable to execute given queries")
