@@ -11,7 +11,7 @@ import (
 )
 
 type DB struct {
-	database *sqlx.DB
+	Database *sqlx.DB
 }
 
 func CreateDB(conn string) (*DB, error){
