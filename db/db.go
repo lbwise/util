@@ -43,6 +43,7 @@ func (DB *DB) QueryFromFile(path string) (string, error) {
 func (DB *DB) Exec(query string) (sql.Result, error) {
 	res, err := DB.database.Exec(query)
 	if err != nil {
+		fmt.Println(err.Error())
 		return nil, errors.New("unable to execute given queries")
 	}
 	return res, nil
