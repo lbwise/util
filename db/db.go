@@ -27,7 +27,7 @@ func CreateDB(conn string) (*DB, error){
 }
 
 
-func (DB *DB) QueryFromFile(path string) (string, error) {
+func (DB *Database) QueryFromFile(path string) (string, error) {
 	fi, err := os.Open(path)
 	if err != nil {
 		return "", errors.New("could not open given file")
@@ -42,7 +42,7 @@ func (DB *DB) QueryFromFile(path string) (string, error) {
 
 
 // Exec is a proxy for the sql.DB method Exec
-func (DB *DB) Exec(query string) (sql.Result, error) {
+func (DB *Database) Exec(query string) (sql.Result, error) {
 	res, err := DB.database.Exec(query)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -52,7 +52,7 @@ func (DB *DB) Exec(query string) (sql.Result, error) {
 }
 
 // QueryRow selects a single row and tranforms it into a struct of the given type
-func (DB *DB) QueryRow(query string, dest interface{}) (interface{}, error) {
+func (DB *Database) QueryRow(query string, dest interface{}) (interface{}, error) {
 	err := DB.database.QueryRowx(query).StructScan(dest)
 	if err != nil {
 		return nil, errors.New("could not query row with given command")
@@ -61,7 +61,7 @@ func (DB *DB) QueryRow(query string, dest interface{}) (interface{}, error) {
 }
 
 // Query selects multiple rows and transforms it into an slice of structs of the given type
-func (DB *DB) Query(query string, queryType interface{}) (interface{}, error) {
+func (DB *Database) Query(query string, queryType interface{}) (interface{}, error) {
 	var objects *[]interface{}
 	err := DB.database.QueryRowx(query).StructScan(objects)
 	if err != nil {
